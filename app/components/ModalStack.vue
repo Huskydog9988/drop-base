@@ -40,6 +40,10 @@ const stack = useModalStack();
 async function handleCallback(modalIdx: number, event: string, args: any[]) {
   const modal = stack.value[modalIdx];
   console.log(modal);
+  if (!modal) {
+    console.error("modal is undefined");
+    return;
+  }
   const close = () => {
     stack.value.splice(modalIdx, 1);
   };
