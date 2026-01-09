@@ -1,7 +1,8 @@
-import type { Component } from "vue";
-import ConfirmationModal from "../../components/ConfirmationModal.vue";
-import NotificationModal from "../../components/NotificationModal.vue";
-import TextInputModal from "../../components/TextInputModal.vue";
+import { ref, type Component, type Ref } from "vue";
+import ConfirmationModal from "../components/ConfirmationModal.vue";
+import NotificationModal from "../components/NotificationModal.vue";
+import TextInputModal from "../components/TextInputModal.vue";
+import { useState } from "nuxt/app";
 
 export type ModalCallbackType<T extends ModalType> = (
   event: ModalEvents[T],
@@ -20,13 +21,13 @@ export interface ModalStackElement<T extends ModalType> {
 export enum ModalType {
   Confirmation,
   Notification,
-  TextInput
+  TextInput,
 }
 
 export type ModalEvents = {
   [ModalType.Confirmation]: "confirm" | "cancel";
   [ModalType.Notification]: "close";
-  [ModalType.TextInput]: "cancel" | "submit"
+  [ModalType.TextInput]: "cancel" | "submit";
 };
 
 export type ModalDatas = {
@@ -41,12 +42,12 @@ export type ModalDatas = {
     buttonText?: string;
   };
   [ModalType.TextInput]: {
-    title: string,
-    description: string,
-    buttonText?: string,
-    dft?: string,
-    placeholder?: string,
-  }
+    title: string;
+    description: string;
+    buttonText?: string;
+    dft?: string;
+    placeholder?: string;
+  };
 };
 
 const modalComponents: { [key in ModalType]: Component } = {
