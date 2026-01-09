@@ -1,7 +1,7 @@
 import type { Component } from "vue";
-import ConfirmationModal from "../components/ConfirmationModal.vue";
-import NotificationModal from "../components/NotificationModal.vue";
-import TextInputModal from "../components/TextInputModal.vue";
+import ConfirmationModal from "../../components/ConfirmationModal.vue";
+import NotificationModal from "../../components/NotificationModal.vue";
+import TextInputModal from "../../components/TextInputModal.vue";
 
 export type ModalCallbackType<T extends ModalType> = (
   event: ModalEvents[T],
