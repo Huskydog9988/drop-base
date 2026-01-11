@@ -7,7 +7,7 @@ import { useState } from "nuxt/app";
 export type ModalCallbackType<T extends ModalType> = (
   event: ModalEvents[T],
   close: () => void,
-  ...args: any[]
+  ...args: unknown[]
 ) => Promise<void> | void;
 
 export interface ModalStackElement<T extends ModalType> {
@@ -72,4 +72,5 @@ export function createModal<T extends ModalType>(
 }
 
 export const useModalStack = () =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useState<Array<ModalStackElement<any>>>("modal-stack", () => []);

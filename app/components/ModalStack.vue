@@ -1,9 +1,9 @@
 <template>
   <TransitionGroup name="modal">
     <component
+      :is="modal.component"
       v-for="(modal, modalIdx) in stack"
       :key="modal.data"
-      :is="modal.component"
       :z-height="(modalIdx + 1) * 50"
       :loading="modal.loading"
       :data="modal.data"
@@ -15,29 +15,14 @@
   <div id="modalstack"></div>
 </template>
 
-<style>
-.modal-enter-active,
-.modal-leave-active {
-  transition: all 0.2s ease;
-}
-.modal-enter-from {
-  opacity: 0;
-}
-.modal-enter-to {
-  opacity: 100;
-}
-.modal-leave-from {
-  opacity: 100;
-}
-.modal-leave-to {
-  opacity: 0;
-}
-</style>
-
 <script setup lang="ts">
 const stack = useModalStack();
 
-async function handleCallback(modalIdx: number, event: string, args: any[]) {
+async function handleCallback(
+  modalIdx: number,
+  event: string,
+  args: unknown[]
+) {
   const modal = stack.value[modalIdx];
   console.log(modal);
   if (!modal) {
@@ -58,3 +43,22 @@ async function handleCallback(modalIdx: number, event: string, args: any[]) {
   }
 }
 </script>
+
+<style>
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.2s ease;
+}
+.modal-enter-from {
+  opacity: 0;
+}
+.modal-enter-to {
+  opacity: 100;
+}
+.modal-leave-from {
+  opacity: 100;
+}
+.modal-leave-to {
+  opacity: 0;
+}
+</style>
